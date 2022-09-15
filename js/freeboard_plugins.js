@@ -1259,7 +1259,7 @@ function PaneModel(theFreeboardModel, widgetPlugins) {
 			width: self.width(),
 			row: self.row,
 			col: self.col,
-			col_width: Number(self.col_width()),
+			col_width: self.col_width(),
 			widgets: widgets
 		};
 	}
@@ -2210,6 +2210,8 @@ function WidgetModel(theFreeboardModel, widgetPlugins) {
 					self.widgetInstance = widgetInstance;
 					self.shouldRender(true);
 					self._heightUpdate.valueHasMutated();
+					// Inject send method into widget
+					self.widgetInstance.sendValue = self.sendValue.bind(self)
 
 				});
 			}
@@ -2223,6 +2225,24 @@ function WidgetModel(theFreeboardModel, widgetPlugins) {
 			}
 		}
 	});
+
+	// Allow for widgets to send data back to sources
+	this.sendValue = function(sourceid, topic, value) {
+		console.log('send', sourceid, value);
+
+		if (sourceid) {
+			var matches = sourceid.match(/datasources\[["'](\w+)["']\]/);
+			if (matches) {
+				_.each(theFreeboardModel.datasources(), function(d) {
+					if (d.name() == matches[1]) {
+						if (d.datasourceInstance.send && _.isFunction(d.datasourceInstance.send)) {
+							d.datasourceInstance.send(value,topic);
+						}
+					}
+				})
+			}
+		}
+	},
 
 	this.settings = ko.observable({});
 	this.settings.subscribe(function (newValue) {
