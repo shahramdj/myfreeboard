@@ -1,0 +1,421 @@
+{
+	"version": 1,
+	"allow_edit": true,
+	"plugins": [],
+	"panes": [
+		{
+			"title": "",
+			"width": 1,
+			"row": {
+				"2": 1,
+				"3": 1,
+				"4": 1
+			},
+			"col": {
+				"2": 2,
+				"3": 1,
+				"4": 1
+			},
+			"col_width": "1",
+			"widgets": [
+				{
+					"type": "text_widget",
+					"settings": {
+						"size": "regular",
+						"value": "datasources[\"clock\"][\"time_string_value\"]",
+						"animate": true
+					}
+				},
+				{
+					"type": "sparkline",
+					"settings": {
+						"title": "Temperature",
+						"value": [
+							"datasources[\"sensmitter_1\"][\"Data\"][\"Temperature\"]",
+							"datasources[\"sensmitter_2\"][\"Data\"][\"Temperature\"]",
+							"datasources[\"sensmitter_3\"][\"Data\"][\"Temperature\"]",
+							"datasources[\"arduino\"][\"d\"][\"temperature [C]\"]"
+						],
+						"include_legend": true,
+						"legend": "Sensmitter 1, Sensmitter 2,Sensmitter 3,Arduino"
+					}
+				},
+				{
+					"type": "sparkline",
+					"settings": {
+						"title": "Humidity",
+						"value": [
+							"datasources[\"sensmitter_1\"][\"Data\"][\"Humidity\"]",
+							"datasources[\"sensmitter_2\"][\"Data\"][\"Humidity\"]",
+							"datasources[\"sensmitter_3\"][\"Data\"][\"Humidity\"]",
+							"datasources[\"arduino\"][\"d\"][\"relative humidity [%]\"]"
+						],
+						"include_legend": true,
+						"legend": "Sensmitter 1, Sensmitter 2, Sensmitter 3, Arduino"
+					}
+				},
+				{
+					"type": "gauge",
+					"settings": {
+						"title": "Sensmitter 1: Pressure",
+						"value": "datasources[\"sensmitter_1\"][\"Data\"][\"Pressure\"]",
+						"min_value": 0,
+						"max_value": "2000"
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"3": 1,
+				"4": 1
+			},
+			"col": {
+				"3": 2,
+				"4": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "sparkline",
+					"settings": {
+						"title": "Light level",
+						"value": [
+							"datasources[\"sensmitter_1\"][\"Data\"][\"Light\"]",
+							"datasources[\"sensmitter_2\"][\"Data\"][\"Light\"]",
+							"datasources[\"sensmitter_3\"][\"Data\"][\"Light\"]",
+							"datasources[\"arduino\"][\"d\"][\"light level\"]"
+						],
+						"include_legend": true,
+						"legend": "Sensmitter 1, Sensmitter 2, Sensmitter 3, Arduino"
+					}
+				},
+				{
+					"type": "sparkline",
+					"settings": {
+						"title": "Movement (PIR)",
+						"value": [
+							"datasources[\"sensmitter_2\"][\"Data\"][\"PIR\"]",
+							"datasources[\"sensmitter_3\"][\"Data\"][\"PIR\"]",
+							"datasources[\"arduino\"][\"d\"][\"movement [0/1]\"]"
+						],
+						"include_legend": true,
+						"legend": "Sensmitter 2, Sensmitter 3, Arduino"
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"title": "Sound threshold (Arduino)",
+						"value": "datasources[\"arduino\"][\"d\"][\"sound treshold\"]",
+						"on_text": "Noisy",
+						"off_text": "Silent"
+					}
+				},
+				{
+					"type": "sparkline",
+					"settings": {
+						"title": "Sound level",
+						"value": [
+							"datasources[\"arduino\"][\"d\"][\"sound level\"]",
+							"datasources[\"phone\"][\"Data\"][\"Noise\"]"
+						],
+						"include_legend": true,
+						"legend": "Arduino, Mobile phone"
+					}
+				},
+				{
+					"type": "sparkline",
+					"settings": {
+						"title": "Distance from Arduino (cm)",
+						"value": [
+							"datasources[\"arduino\"][\"d\"][\"distance [cm]\"]"
+						],
+						"include_legend": false
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"3": 1,
+				"4": 1
+			},
+			"col": {
+				"3": 3,
+				"4": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Mobile Device Status",
+						"size": "regular",
+						"value": "datasources[\"phone\"][\"Data\"][\"DeviceMoviment\"]",
+						"sparkline": false,
+						"animate": true
+					}
+				},
+				{
+					"type": "sparkline",
+					"settings": {
+						"title": "Attention towards whiteboard",
+						"value": [
+							"datasources[\"Eye Contact\"][\"d\"][\"detected_faces\"]",
+							"datasources[\"Eye Contact\"][\"d\"][\"Looking_towards_camera\"]",
+							"datasources[\"Eye Contact\"][\"d\"][\"eye_contacs\"]"
+						],
+						"include_legend": true,
+						"legend": "Number of faces, Looking towards whiteboard, Looking at the camera"
+					}
+				},
+				{
+					"type": "sparkline",
+					"settings": {
+						"title": "Crossing the room (Axis Camera)",
+						"value": [
+							"datasources[\"axis_cross_camera\"][\"d\"][\"v\"]"
+						]
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Roof Camera 1",
+						"size": "regular",
+						"value": "datasources[\"axis_roofcam_1\"][\"d\"][\"passage\"]",
+						"sparkline": true,
+						"animate": true
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Roof Camera 2",
+						"size": "regular",
+						"value": "datasources[\"axis_roofcam_2\"][\"d\"][\"passage\"]",
+						"sparkline": true,
+						"animate": true
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Roof Camera 3",
+						"size": "regular",
+						"value": "datasources[\"axis_roofcam_3\"][\"d\"][\"passage\"]",
+						"sparkline": true,
+						"animate": true
+					}
+				}
+			]
+		},
+		{
+			"title": "DIVS Output",
+			"width": 1,
+			"row": {
+				"4": 1
+			},
+			"col": {
+				"4": 4
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Predicted number of people in the Room",
+						"size": "regular",
+						"value": "1,4,0,2,7,3,6",
+						"sparkline": true,
+						"animate": true
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Predicted activity",
+						"size": "regular",
+						"value": "Silent Work",
+						"sparkline": true,
+						"animate": true
+					}
+				}
+			]
+		}
+	],
+	"datasources": [
+		{
+			"name": "sensmitter_3",
+			"type": "aws_iot_ws_mqtt",
+			"settings": {
+				"endpoint": "a1y7d41s0oj85v.iot.us-east-1.amazonaws.com",
+				"region": "us-east-1",
+				"accessKey": "AKIAJR4MBY4AGEP54QSQ",
+				"secretKey": "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",
+				"topics": [
+					{
+						"topicName": "IoTaP-lab/Phone/sensmitter_3/multiple"
+					}
+				],
+				"name": "sensmitter_3"
+			}
+		},
+		{
+			"name": "clock",
+			"type": "clock",
+			"settings": {
+				"refresh": 1,
+				"name": "clock"
+			}
+		},
+		{
+			"name": "sensmitter_1",
+			"type": "aws_iot_ws_mqtt",
+			"settings": {
+				"endpoint": "a1y7d41s0oj85v.iot.us-east-1.amazonaws.com",
+				"region": "us-east-1",
+				"accessKey": "AKIAJR4MBY4AGEP54QSQ",
+				"secretKey": "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",
+				"topics": [
+					{
+						"topicName": "IoTaP-lab/Phone/sensmitter_1/multiple"
+					}
+				],
+				"name": "sensmitter_1"
+			}
+		},
+		{
+			"name": "sensmitter_2",
+			"type": "aws_iot_ws_mqtt",
+			"settings": {
+				"endpoint": "a1y7d41s0oj85v.iot.us-east-1.amazonaws.com",
+				"region": "us-east-1",
+				"accessKey": "AKIAJR4MBY4AGEP54QSQ",
+				"secretKey": "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",
+				"topics": [
+					{
+						"topicName": "IoTaP-lab/Phone/sensmitter_2/multiple"
+					}
+				],
+				"name": "sensmitter_2"
+			}
+		},
+		{
+			"name": "phone",
+			"type": "aws_iot_ws_mqtt",
+			"settings": {
+				"endpoint": "a1y7d41s0oj85v.iot.us-east-1.amazonaws.com",
+				"region": "us-east-1",
+				"accessKey": "AKIAJR4MBY4AGEP54QSQ",
+				"secretKey": "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",
+				"topics": [
+					{
+						"topicName": "IoTaP-lab/Phone/Phone/multiple"
+					}
+				],
+				"name": "phone"
+			}
+		},
+		{
+			"name": "arduino",
+			"type": "aws_iot_ws_mqtt",
+			"settings": {
+				"endpoint": "a1y7d41s0oj85v.iot.us-east-1.amazonaws.com",
+				"region": "us-east-1",
+				"accessKey": "AKIAJR4MBY4AGEP54QSQ",
+				"secretKey": "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",
+				"topics": [
+					{
+						"topicName": "IoTaP-lab/Linuxcomputer/Arduino/multiple"
+					}
+				],
+				"name": "arduino"
+			}
+		},
+		{
+			"name": "Eye Contact",
+			"type": "aws_iot_ws_mqtt",
+			"settings": {
+				"endpoint": "a1y7d41s0oj85v.iot.us-east-1.amazonaws.com",
+				"region": "us-east-1",
+				"accessKey": "AKIAJR4MBY4AGEP54QSQ",
+				"secretKey": "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",
+				"topics": [
+					{
+						"topicName": "IoTaP-lab/EyeContact_1/EyeContact"
+					}
+				],
+				"name": "Eye Contact"
+			}
+		},
+		{
+			"name": "axis_cross_camera",
+			"type": "aws_iot_ws_mqtt",
+			"settings": {
+				"endpoint": "a1y7d41s0oj85v.iot.us-east-1.amazonaws.com",
+				"region": "us-east-1",
+				"accessKey": "AKIAJR4MBY4AGEP54QSQ",
+				"secretKey": "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",
+				"topics": [
+					{
+						"topicName": "IoTaP-lab/Linuxcomputer/Axiscamera/multiple"
+					}
+				],
+				"name": "axis_cross_camera"
+			}
+		},
+		{
+			"name": "axis_roofcam_1",
+			"type": "aws_iot_ws_mqtt",
+			"settings": {
+				"endpoint": "a1y7d41s0oj85v.iot.us-east-1.amazonaws.com",
+				"region": "us-east-1",
+				"accessKey": "AKIAJR4MBY4AGEP54QSQ",
+				"secretKey": "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",
+				"topics": [
+					{
+						"topicName": "IoTaP-lab/Raspberry/cameraACCC8E7E6EAF/multiple"
+					}
+				],
+				"name": "axis_roofcam_1"
+			}
+		},
+		{
+			"name": "axis_roofcam_2",
+			"type": "aws_iot_ws_mqtt",
+			"settings": {
+				"endpoint": "a1y7d41s0oj85v.iot.us-east-1.amazonaws.com",
+				"region": "us-east-1",
+				"accessKey": "AKIAJR4MBY4AGEP54QSQ",
+				"secretKey": "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",
+				"topics": [
+					{
+						"topicName": "IoTaP-lab/Raspberry/cameraACCC8E7E6E8C/multiple"
+					}
+				],
+				"name": "axis_roofcam_2"
+			}
+		},
+		{
+			"name": "axis_roofcam_3",
+			"type": "aws_iot_ws_mqtt",
+			"settings": {
+				"endpoint": "a1y7d41s0oj85v.iot.us-east-1.amazonaws.com",
+				"region": "us-east-1",
+				"accessKey": "AKIAJR4MBY4AGEP54QSQ",
+				"secretKey": "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",
+				"topics": [
+					{
+						"topicName": "IoTaP-lab/Raspberry/cameraACCC8E7E6E9F/multiple"
+					}
+				],
+				"name": "axis_roofcam_3"
+			}
+		}
+	],
+	"columns": 4
+}
