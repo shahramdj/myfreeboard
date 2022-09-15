@@ -106,42 +106,73 @@
     <ul data-bind="template: { name: 'pane-template', foreach: panes}">
     </ul>
 </div>
-
 <script type="text/html" id="pane-template">
     <li data-bind="pane: true">
-        <header>
-            <h1 data-bind="text: title"></h1>
-            <ul class="board-toolbar pane-tools">
-                <li data-bind="pluginEditor: {operation: 'add', type: 'widget'}">
-                    <i class="icon-plus icon-white"></i>
-                </li>
-                <li data-bind="pluginEditor: {operation: 'edit', type: 'pane'}">
-                    <i class="icon-wrench icon-white"></i>
-                </li>
-                <li data-bind="pluginEditor: {operation: 'delete', type: 'pane'}">
-                    <i class="icon-trash icon-white"></i>
-                </li>
-            </ul>
-        </header>
-        <section data-bind="foreach: widgets">
-            <div class="sub-section" data-bind="css: 'sub-section-height-' + height()">
-                <div class="widget" data-bind="widget: true, css:{fillsize:fillSize}"></div>
-                <div class="sub-section-tools">
-                    <ul class="board-toolbar">
-                        <!-- ko if:$parent.widgetCanMoveUp($data) -->
-                        <li data-bind="click:$parent.moveWidgetUp"><i class="icon-chevron-up icon-white"></i></li>
-                        <!-- /ko -->
-                        <!-- ko if:$parent.widgetCanMoveDown($data) -->
-                        <li data-bind="click:$parent.moveWidgetDown"><i class="icon-chevron-down icon-white"></i></li>
-                        <!-- /ko -->
-                        <li data-bind="pluginEditor: {operation: 'edit', type: 'widget'}"><i class="icon-wrench icon-white"></i></li>
-                        <li data-bind="pluginEditor: {operation: 'delete', type: 'widget'}"><i class="icon-trash icon-white"></i></li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+    <header>
+    <h1 data-bind="text: title"></h1>
+    <ul class="board-toolbar pane-tools">
+    <li data-bind="pluginEditor: {operation: 'add', type: 'widget'}">
+    <i class="icon-plus icon-white"></i>
     </li>
-</script>
+    <li data-bind="pluginEditor: {operation: 'edit', type: 'pane'}">
+    <i class="icon-wrench icon-white"></i>
+    </li>
+    <li data-bind="pluginEditor: {operation: 'delete', type: 'pane'}">
+    <i class="icon-trash icon-white"></i>
+    </li>
+    </ul>
+    </header>
+    <section data-bind="foreach: widgets">
+    <div class="sub-section" data-bind="css: 'sub-section-height-' + height()">
+    <div class="widget" data-bind="widget: true, css:{fillsize:fillSize}"></div>
+    <div class="sub-section-tools">
+    <ul class="board-toolbar">
+    <!-- ko if:$parent.widgetCanMoveUp($data) -->
+    <li data-bind="click:$parent.moveWidgetUp"><i class="icon-chevron-up icon-white"></i></li>
+    <!-- /ko -->
+    <!-- ko if:$parent.widgetCanMoveDown($data) -->
+    <li data-bind="click:$parent.moveWidgetDown"><i class="icon-chevron-down icon-white"></i></li>
+    <!-- /ko -->
+    <li data-bind="pluginEditor: {operation: 'edit', type: 'widget'}"><i class="icon-wrench icon-white"></i></li>
+    <li data-bind="pluginEditor: {operation: 'delete', type: 'widget'}"><i class="icon-trash icon-white"></i></li>
+    </ul>
+    </div>
+    </div>
+    </section>
+    </li>
+    </script>
+<script type="text/javascript">
+    head.js("js/freeboard_plugins.min.js",
+            // **** Load AWS IoT Websockets MQTT
+            "plugins/freeboard-aws-iot-ws-mqtt/index.js",
+            // *** Load more plugins here ***
+            "plugins/plugin_highcharts.js",
+            "plugins/actuator.js",
+            "plugins/actuatorMQTT.js",
+            "plugins/switch.js",
+            "plugins/slider-plugin.js",
+            "plugins/freeboard-mqtt-paho/mqtt.paho.plugin.js",
+            "plugins/c3chart/freeboard-c3.js",
+            "lib/js/freeboard/WidgetModel.js",
+
+
+            function(){
+            $(function()
+              { //DOM Ready
+              freeboard.initialize(true);
+              
+              var hashpattern = window.location.hash.match(/(&|#)source=([^&]+)/);
+              if (hashpattern !== null) {
+              $.getJSON(hashpattern[2], function(data) {
+                        freeboard.loadDashboard(data, function() {
+                                                freeboard.setEditing(false);
+                                                });
+                        });
+              }
+              
+              });
+            });
+    </script>
 
 </body>
 </html>
